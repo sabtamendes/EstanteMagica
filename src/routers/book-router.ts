@@ -7,6 +7,7 @@ const bookRouter = Router();
 
 bookRouter
   .post("/", validateBody(createBookSchema), postBook)
-  .get("/:magicCode", getBook);
+  .get("/", getBook); //vou trazer pelo body como Magic Code
+  // .get("/:magicCode", getBook);
 
 export { bookRouter };
