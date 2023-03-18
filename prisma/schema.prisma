@@ -7,22 +7,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Livro {
-  id           Int       @id @default(autoincrement())
-  titulo       String
-  autor        String
-  professor    String
-  codigo_magico String    @unique
-  criadoEm     DateTime  @default(now())
-  paginas      Pagina[]
+model Book {
+  id         Int        @id @default(autoincrement())
+  title      String     @db.VarChar(255)
+  author     String     @db.VarChar(255)
+  professor  String     @db.VarChar(255)
+  magicCode  String     @unique
+  createdAt  DateTime   @default(now())
+  pages      Page[]
 }
 
-model Pagina {
-  id            Int      @id @default(autoincrement())
-  numero_pagina Int
-  texto         String
-  imagem_url    String
-  livro         Livro    @relation(fields: [livro_id], references: [id])
-  livro_id      Int
+model Page {
+  id         Int      @id @default(autoincrement())
+  pageNumber Int
+  pageType   PageType
+  content    String   @db.VarChar(255)
+  Book       Book     @relation(fields: [bookId], references: [id])
+  bookId     Int
 }
 
+enum PageType {
+  TEXT
+  IMAGE
+}

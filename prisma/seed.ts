@@ -1,56 +1,38 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, PageType } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-async function seed() {
-  const livro = await prisma.livro.create({
+async function createBook() {
+  const book = await prisma.book.create({
     data: {
-      titulo: 'Aventuras na Floresta',
-      autor: 'Maria Silva',
-      professor: 'João Souza',
-      codigo_magico: 'ABCDEF',
-      paginas: {
+      title: 'Meu Livro',
+      author: 'Eu Mesmo',
+      professor: 'Prof. Fulano',
+      magicCode: 'ABCDEF',
+      pages: {
         create: [
-          {
-            numero_pagina: 1,
-            texto: 'Era uma vez uma garotinha chamada Ana que morava na cidade grande. Ela adorava brincar de explorar lugares novos.',
-            imagem_url: 'https://exemplo.com/imagem1.jpg',
-          },
-          {
-            numero_pagina: 2,
-            texto: 'Um dia, Ana decidiu explorar a floresta que ficava nos arredores da cidade. Ela estava animada e cheia de expectativas.',
-            imagem_url: 'https://exemplo.com/imagem2.jpg',
-          },
-          {
-            numero_pagina: 3,
-            texto: 'Ao chegar na floresta, Ana se deparou com uma paisagem incrível. Árvores altas, plantas exóticas e animais que ela nunca havia visto antes.',
-            imagem_url: 'https://exemplo.com/imagem3.jpg',
-          },
-          {
-            numero_pagina: 4,
-            texto: 'Mas Ana não sabia que a floresta era também o lar de criaturas mágicas. De repente, ela se viu cercada por fadas, unicórnios e outras criaturas que ela só conhecia nos contos de fadas.',
-            imagem_url: 'https://exemplo.com/imagem4.jpg',
-          },
-          {
-            numero_pagina: 5,
-            texto: 'Ana ficou encantada com tudo aquilo e decidiu explorar ainda mais a floresta. Ela se aventurou por trilhas e cachoeiras, sempre acompanhada pelos seus novos amigos mágicos.',
-            imagem_url: 'https://exemplo.com/imagem5.jpg',
-          },
-          {
-            numero_pagina: 6,
-            texto: 'No fim do dia, Ana voltou para casa cheia de histórias incríveis para contar. Ela nunca mais esqueceria a aventura que viveu na floresta.',
-            imagem_url: 'https://exemplo.com/imagem6.jpg',
-          },
-        ],
-      },
-    },
+          { pageNumber: 1, pageType: PageType.TEXT, content: 'Lorem ipsum dolor sit amet' },
+          { pageNumber: 2, pageType: PageType.IMAGE, content: 'https://exemplo.com/imagem.jpg' },
+          { pageNumber: 3, pageType: PageType.TEXT, content: 'consectetur adipiscing elit' },
+          { pageNumber: 4, pageType: PageType.IMAGE, content: 'https://exemplo.com/imagem2.jpg' },
+          { pageNumber: 5, pageType: PageType.TEXT, content: 'sed do eiusmod tempor' },
+          { pageNumber: 6, pageType: PageType.IMAGE, content: 'https://exemplo.com/imagem3.jpg' },
+          { pageNumber: 7, pageType: PageType.TEXT, content: 'incididunt ut labore et dolore magna aliqua' },
+          { pageNumber: 8, pageType: PageType.IMAGE, content: 'https://exemplo.com/imagem4.jpg' },
+          { pageNumber: 9, pageType: PageType.TEXT, content: 'Ut enim ad minim veniam' },
+          { pageNumber: 10, pageType: PageType.IMAGE, content: 'https://exemplo.com/imagem5.jpg' },
+          { pageNumber: 11, pageType: PageType.TEXT, content: 'quis nostrud exercitation ullamco laboris' },
+          { pageNumber: 12, pageType: PageType.IMAGE, content: 'https://exemplo.com/imagem6.jpg' },
+        ]
+      }
+    }
   });
 
-  console.log(`Livro criado com sucesso! ID: ${livro.autor}`);
+  console.log(book);
 }
 
-seed()
-  .catch((e) => console.error(e))
+createBook()
+  .catch(e => console.error(e))
   .finally(async () => {
     await prisma.$disconnect();
   });
