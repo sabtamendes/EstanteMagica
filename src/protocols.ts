@@ -1,4 +1,10 @@
 import { PageType } from "@prisma/client";
+
+export type ApplicationError = {
+  name: string;
+  message: string;
+};
+
 export type MagicBook = {
   title: string;
   author: string;
