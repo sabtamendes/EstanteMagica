@@ -4,6 +4,14 @@
     "colName": "Estante Mágica",
     "created": "2023-03-18T00:01:28.475Z",
     "sortNum": 10000,
-    "folders": []
+    "folders": [
+      {
+        "_id": "d40a8f3c-3160-49cc-8f71-d147bc894abe",
+        "name": "GET /health",
+        "containerId": "",
+        "created": "2023-03-18T01:00:47.387Z",
+        "sortNum": 10000
+      }
+    ]
   }
 ]
