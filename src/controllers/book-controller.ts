@@ -14,11 +14,23 @@ export async function postBook(req: Request, res: Response) {
 
     return res.status(httpStatus.CREATED).send(code);
   } catch (error) {
-    return res.status(httpStatus.BAD_REQUEST);
+    return res.status(httpStatus.BAD_REQUEST).send({});
   }
 }
 
-export async function getBook(req: Request, res: Response) {}
+export async function getBook(req: Request, res: Response) {
+  const magicCode = req.body.magicCode as string;
+
+  try {
+    const book = await serviceBook.getBook(magicCode);
+    return res.status(httpStatus.OK).send(book);
+  } catch (error) {
+    if (error.name === "notFoundError") {
+      return res.status(httpStatus.NOT_FOUND).send({});
+    }
+    return res.status(httpStatus.BAD_REQUEST).send({});
+  }
+}
 
 function generateRandomCode(): string {
   let code = "";

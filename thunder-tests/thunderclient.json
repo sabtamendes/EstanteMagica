@@ -37,13 +37,18 @@
     "colId": "476166d8-a418-4f22-aa20-116c97fe3d7d",
     "containerId": "e88474a5-9d2e-40c4-b41b-71fcb24a452b",
     "name": "GET /book",
-    "url": "",
+    "url": "localhost:4000/book",
     "method": "GET",
     "sortNum": 30000,
     "created": "2023-03-18T18:27:36.968Z",
-    "modified": "2023-03-18T18:27:52.046Z",
+    "modified": "2023-03-19T22:09:39.769Z",
     "headers": [],
     "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"magicCode\": \"LTGKJG\"\n}",
+      "form": []
+    },
     "tests": []
   }
 ]

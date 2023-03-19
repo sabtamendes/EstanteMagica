@@ -2,7 +2,7 @@ import { prisma } from "@/config";
 import { BookWithMagicCodeAndPages } from "@/protocols";
 
 async function createBook(bookData: BookWithMagicCodeAndPages) {
-  const createdBook = await prisma.book.create({
+  return await prisma.book.create({
     data: {
       title: bookData.title,
       author: bookData.author,
@@ -16,10 +16,20 @@ async function createBook(bookData: BookWithMagicCodeAndPages) {
       magicCode: true,
     },
   });
-  return createdBook;
 }
 
-async function find() {}
+async function find(magicCode: string) {
+  return await prisma.book.findUnique({
+    where: { magicCode },
+    include: {
+      pages: {
+        orderBy: {
+          pageNumber: "asc",
+        },
+      },
+    },
+  });
+}
 
 const repositoryBook = {
   createBook,
