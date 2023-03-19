@@ -17,3 +17,11 @@ export const createBookSchema = Joi.object<MagicBook>({
     )
     .required(),
 });
+
+type Code = {
+  magicCode: number;
+};
+
+export const magicCodeSchema = Joi.object<Code>({
+  magicCode: Joi.string().min(6).max(6).uppercase().required(),
+});

@@ -1,20 +1,24 @@
+import { notFoundError } from "@/errors";
 import { BookWithMagicCodeAndPages } from "@/protocols";
 import repositoryBook from "@/repositories/book-repository";
 
-async function postBook(book: BookWithMagicCodeAndPages ) {
+async function postBook(book: BookWithMagicCodeAndPages) {
+  const magicCode = await repositoryBook.createBook(book);
 
-    const magicCode =  await repositoryBook.createBook(book);
-
-    return magicCode
+  return magicCode;
 }
 
-async function getBook(){
+async function getBook(magicCode: string) {
+  const book = await repositoryBook.find(magicCode);
 
+  if (!book) throw notFoundError();
+
+  return book;
 }
 
 const serviceBook = {
-    postBook,
-    getBook
-}
+  postBook,
+  getBook,
+};
 
 export default serviceBook;
