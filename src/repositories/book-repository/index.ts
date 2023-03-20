@@ -31,9 +31,14 @@ async function find(magicCode: string) {
   });
 }
 
+async function unique(title: string) {
+  return await prisma.book.findFirst({ where: { title } });
+}
+
 const repositoryBook = {
   createBook,
   find,
+  unique,
 };
 
 export default repositoryBook;
