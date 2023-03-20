@@ -1,0 +1,79 @@
+import repositoryBook from "@/repositories/book-repository";
+import * as protocols from "@/protocols";
+import serviceBook from "@/services/book-service";
+import * as errors from "@/errors";
+
+afterEach(() => {
+  jest.restoreAllMocks();
+});
+
+describe("postBook service", () => {
+    let uniqueSpy: jest.SpyInstance;
+    let createSpy: jest.SpyInstance;
+    beforeEach(() => {
+        uniqueSpy = jest.spyOn(repositoryBook, "unique");
+        createSpy = jest.spyOn(repositoryBook, "createBook");
+      });
+  it("shoul throw conflict error if title already exists", async () => {
+    const book: protocols.BookWithMagicCodeAndPages = {
+      title: "Harry Potter and the Philosopher's Stone",
+      author: "J.K. Rowling",
+      professor: "Albus Dumbledore",
+      magicCode: "ABDEFR",
+      pages: [
+        {
+          pageNumber: 1,
+          pageType: "TEXT",
+          content: "Lorem ipsum dolor sit amet",
+          Book: { connect: { magicCode: "ABDEFR" } },
+        },
+        {
+          pageNumber: 2,
+          pageType: "IMAGE",
+          content: "https://exemplo.com/imagem.jpg",
+          Book: { connect: { magicCode: "ABDEFR" } },
+        },
+      ],
+    };
+
+    const title = "The Art of Unit Testing";
+    uniqueSpy.mockResolvedValue(true);
+
+    await expect(serviceBook.postBook(book, title)).rejects.toEqual(errors.conflictError(""));
+
+    expect(uniqueSpy).toHaveBeenCalledWith(title);
+    expect(createSpy).not.toHaveBeenCalled();
+  });
+
+  it("should create a book when the title is unique", async () => {
+    const book: protocols.BookWithMagicCodeAndPages = {
+      title: "Clean Code",
+      author: "Robert C. Martin",
+      professor: "Jane Doe",
+      magicCode: "ABDEFR",
+        pages: [
+        {
+          pageNumber: 1,
+          pageType: "TEXT",
+          content: "Lorem ipsum dolor sit amet",
+          Book: { connect: { magicCode: "ABDEFR" } },
+        },
+        {
+          pageNumber: 2,
+          pageType: "IMAGE",
+          content: "https://exemplo.com/imagem.jpg",
+          Book: { connect: { magicCode: "ABDEFR" } },
+        },
+      ],
+    };
+    const title = "Clean Code";
+    uniqueSpy.mockResolvedValue(false);
+    createSpy.mockResolvedValue("ABDEFR");
+
+    const result = await serviceBook.postBook(book, title);
+
+    expect(result).toEqual("ABDEFR");
+    expect(uniqueSpy).toHaveBeenCalledWith(title);
+    expect(createSpy).toHaveBeenCalledWith(book);
+  });
+});
