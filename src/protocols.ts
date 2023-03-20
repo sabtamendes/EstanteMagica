@@ -25,3 +25,4 @@ export type BookWithMagicCodeAndPages = {
   magicCode: string;
   pages: Prisma.PageCreateInput[];
 }
+
