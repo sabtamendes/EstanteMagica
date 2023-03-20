@@ -12,7 +12,7 @@ async function postBook(book: BookWithMagicCodeAndPages, title: string) {
 }
 
 async function getBook(magicCode: string) {
-  const book = await repositoryBook.find(magicCode);
+  const book = await repositoryBook.findBook(magicCode);
 
   if (!book) throw notFoundError();
 

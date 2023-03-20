@@ -18,7 +18,7 @@ async function createBook(bookData: BookWithMagicCodeAndPages) {
   });
 }
 
-async function find(magicCode: string) {
+async function findBook(magicCode: string) {
   return await prisma.book.findUnique({
     where: { magicCode },
     include: {
@@ -37,7 +37,7 @@ async function unique(title: string) {
 
 const repositoryBook = {
   createBook,
-  find,
+  findBook,
   unique,
 };
 

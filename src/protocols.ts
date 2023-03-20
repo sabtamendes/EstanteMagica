@@ -1,4 +1,4 @@
-import { PageType, Prisma } from "@prisma/client";
+import {  Prisma } from "@prisma/client";
 
 export type ApplicationError = {
   name: string;
@@ -25,4 +25,6 @@ export type BookWithMagicCodeAndPages = {
   magicCode: string;
   pages: Prisma.PageCreateInput[];
 }
+
+export type PageType = "TEXT" | "IMAGE";
 
