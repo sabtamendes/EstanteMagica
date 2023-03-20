@@ -10,10 +10,15 @@ export async function postBook(req: Request, res: Response) {
   const magicCode = generateRandomCode();
   const book = { title, author, professor, magicCode, pages };
   try {
-    const code = await serviceBook.postBook(book);
+    const code = await serviceBook.postBook(book, book.title);
 
     return res.status(httpStatus.CREATED).send(code);
   } catch (error) {
+    if (error.name === "conflictError") {
+      return res
+        .status(httpStatus.CONFLICT)
+        .send({ message: "Título já existe" });
+    }
     return res.status(httpStatus.BAD_REQUEST).send({});
   }
 }
@@ -32,7 +37,7 @@ export async function getBook(req: Request, res: Response) {
   }
 }
 
-function generateRandomCode(): string {
+export function generateRandomCode(): string {
   let code = "";
   while (code.length < 6) {
     const byte = randomBytes(1)[0];

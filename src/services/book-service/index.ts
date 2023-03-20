@@ -1,8 +1,11 @@
-import { notFoundError } from "@/errors";
+import { conflictError, notFoundError } from "@/errors";
 import { BookWithMagicCodeAndPages } from "@/protocols";
 import repositoryBook from "@/repositories/book-repository";
 
-async function postBook(book: BookWithMagicCodeAndPages) {
+async function postBook(book: BookWithMagicCodeAndPages, title: string) {
+  const uniqueTitle = await repositoryBook.unique(title);
+  if (uniqueTitle) throw conflictError("");
+
   const magicCode = await repositoryBook.createBook(book);
 
   return magicCode;
