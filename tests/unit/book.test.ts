@@ -15,7 +15,7 @@ describe("postBook service", () => {
     uniqueSpy = jest.spyOn(repositoryBook, "unique");
     createSpy = jest.spyOn(repositoryBook, "createBook");
   });
-  it("shoul throw conflict error if title already exists", async () => {
+  it("should throw conflict error if title already exists", async () => {
     const book: protocols.BookWithMagicCodeAndPages = {
       title: "Harry Potter and the Philosopher's Stone",
       author: "J.K. Rowling",
@@ -122,6 +122,20 @@ describe("getBook", () => {
     const result = await serviceBook.getBook(magicCode);
 
     expect(result).toEqual(book);
+    expect(resultado).toHaveBeenCalledWith(magicCode);
+  });
+
+  it("should throw not found error when the magic code does not exist", async () => {
+    const magicCode = "NONEXISTENT_CODE";
+
+    const resultado = jest
+      .spyOn(repositoryBook, "findBook")
+      .mockResolvedValueOnce(null);
+
+    await expect(serviceBook.getBook(magicCode)).rejects.toEqual(
+      errors.notFoundError()
+    );
+
     expect(resultado).toHaveBeenCalledWith(magicCode);
   });
 });
