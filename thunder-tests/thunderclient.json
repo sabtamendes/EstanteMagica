@@ -22,12 +22,12 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2023-03-18T18:27:28.610Z",
-    "modified": "2023-03-20T22:44:17.479Z",
+    "modified": "2023-03-21T11:09:38.660Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n      \"title\": \"Minha Livraria\",\n      \"author\": \"Eu Mesmo\",\n      \"professor\": \"Prof. Fulano\",\n      \"pages\": [\n          {\n            \"pageNumber\": 1,\n            \"pageType\": \"TEXT\",\n            \"content\": \"Lorem ipsum dolor sit amet\"\n          },\n          {\n            \"pageNumber\": 2,\n            \"pageType\": \"IMAGE\",\n            \"content\": \"Lorem ipsum dolor sit amet\"\n          },\n          {\n            \"pageNumber\": 3,\n            \"pageType\": \"TEXT\",\n            \"content\": \"consectetur adipiscing elit\"\n          },\n          {\n            \"pageNumber\": 4,\n            \"pageType\": \"IMAGE\",\n            \"content\": \"https://exemplo.com/imagem2.jpg\"\n          },\n          {\n            \"pageNumber\": 5,\n            \"pageType\": \"TEXT\",\n            \"content\": \"sed do eiusmod tempor\"\n          },\n          {\n            \"pageNumber\": 6,\n            \"pageType\": \"IMAGE\",\n            \"content\": \"https://exemplo.com/imagem3.jpg\"\n          },\n          {\n            \"pageNumber\": 7,\n            \"pageType\": \"TEXT\",\n            \"content\": \"incididunt ut labore et dolore magna aliqua\"\n          },\n          {\n            \"pageNumber\": 8,\n            \"pageType\": \"IMAGE\",\n            \"content\": \"https://exemplo.com/imagem4.jpg\"\n          },\n          {\n            \"pageNumber\": 9,\n            \"pageType\": \"TEXT\",\n            \"content\": \"Ut enim ad minim veniam\"\n          },\n          {\n            \"pageNumber\": 10,\n            \"pageType\": \"IMAGE\",\n            \"content\": \"https://exemplo.com/imagem5.jpg\"\n          },\n          {\n            \"pageNumber\": 11,\n            \"pageType\": \"TEXT\",\n            \"content\": \"quis nostrud exercitation ullamco laboris\"\n          },\n          {\n            \"pageNumber\": 12,\n            \"pageType\": \"IMAGE\",\n            \"content\": \"https://exemplo.com/imagem6.jpg\"\n          }\n        ]\n  }",
+      "raw": "{\n      \"title\": \"Minha Livrario\",\n      \"author\": \"Eu Mesmo\",\n      \"professor\": \"Prof. Fulano\",\n      \"pages\": [\n          {\n\n            \"pageType\": \"TEXT\",\n            \"content\": \"Lorem ipsum dolor sit amet\"\n          },\n          {\n            \"pageNumber\": 2,\n            \"pageType\": \"IMAGE\",\n            \"content\": \"Lorem ipsum dolor sit amet\"\n          },\n          {\n            \"pageNumber\": 3,\n            \"pageType\": \"TEXT\",\n            \"content\": \"consectetur adipiscing elit\"\n          },\n          {\n            \"pageNumber\": 4,\n            \"pageType\": \"IMAGE\",\n            \"content\": \"https://exemplo.com/imagem2.jpg\"\n          },\n          {\n            \"pageNumber\": 5,\n            \"pageType\": \"TEXT\",\n            \"content\": \"sed do eiusmod tempor\"\n          },\n          {\n            \"pageNumber\": 6,\n            \"pageType\": \"IMAGE\",\n            \"content\": \"https://exemplo.com/imagem3.jpg\"\n          },\n          {\n            \"pageNumber\": 7,\n            \"pageType\": \"TEXT\",\n            \"content\": \"incididunt ut labore et dolore magna aliqua\"\n          },\n          {\n            \"pageNumber\": 8,\n            \"pageType\": \"IMAGE\",\n            \"content\": \"https://exemplo.com/imagem4.jpg\"\n          },\n          {\n            \"pageNumber\": 9,\n            \"pageType\": \"TEXT\",\n            \"content\": \"Ut enim ad minim veniam\"\n          },\n          {\n            \"pageNumber\": 10,\n            \"pageType\": \"IMAGE\",\n            \"content\": \"https://exemplo.com/imagem5.jpg\"\n          },\n          {\n            \"pageNumber\": 11,\n            \"pageType\": \"TEXT\",\n            \"content\": \"quis nostrud exercitation ullamco laboris\"\n          },\n          {\n            \"pageNumber\": 12,\n            \"pageType\": \"IMAGE\",\n            \"content\": \"https://exemplo.com/imagem6.jpg\"\n          }\n        ]\n  }",
       "form": []
     },
     "tests": []
@@ -37,18 +37,19 @@
     "colId": "476166d8-a418-4f22-aa20-116c97fe3d7d",
     "containerId": "e88474a5-9d2e-40c4-b41b-71fcb24a452b",
     "name": "GET /book",
-    "url": "localhost:4000/book",
+    "url": "localhost:4000/book?magicCode=JCBURQ",
     "method": "GET",
     "sortNum": 30000,
     "created": "2023-03-18T18:27:36.968Z",
-    "modified": "2023-03-20T23:07:35.628Z",
+    "modified": "2023-03-21T16:39:52.484Z",
     "headers": [],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"magicCode\": \"123456\"\n}",
-      "form": []
-    },
+    "params": [
+      {
+        "name": "magicCode",
+        "value": "JCBURQ",
+        "isPath": false
+      }
+    ],
     "tests": []
   }
 ]
