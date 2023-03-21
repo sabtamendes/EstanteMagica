@@ -22,7 +22,7 @@ Crie um arquivo <span style="color: yellow"> .env.development </span> e <span st
  ## 🚀💡 Utilização
   - <strong>Seguindo a ordem de execução:</strong>
 
-1. Para gerar uma nova migração de banco de dados com base no estado atual do schema:
+1. Para gerar uma nova migração de banco de dados com base no estado atual do schema e ou automaticamente gerar o banco de dados:
 
 ```bash
 npm run migration:generate

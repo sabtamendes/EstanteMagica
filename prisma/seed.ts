@@ -1,6 +1,18 @@
 import { PrismaClient, PageType } from "@prisma/client";
-
 const prisma = new PrismaClient();
+import { randomBytes } from "crypto";
+
+export function generateRandomCode(): string {
+  let code = "";
+  while (code.length < 6) {
+    const byte = randomBytes(1)[0];
+    const char = String.fromCharCode(byte);
+    if (char >= "A" && char <= "Z") {
+      code += char;
+    }
+  }
+  return code;
+}
 
 async function createBook() {
   const book = await prisma.book.create({
@@ -8,7 +20,7 @@ async function createBook() {
       title: "Meu Livro",
       author: "Eu Mesmo",
       professor: "Prof. Fulano",
-      magicCode: "ABCDEF",
+      magicCode: generateRandomCode(),
       pages: {
         create: [
           {
