@@ -1,0 +1,99 @@
+openapi: "3.0.0"
+info:
+  version: "1.0.0"
+  title: API de livros
+  description: API responsável por fornecer informações sobre livros e páginas relacionados a eles.
+
+paths:
+  /api/book/:
+    get:
+      summary: Obter informações de um livro
+      description: Este exemplo mostra como enviar uma solicitação GET para obter o livro relacionado ao magicCode.
+      parameters:
+        - name: magicCode
+          in: query
+          required: true
+          description: Código mágico do livro que se deseja obter informações
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 23
+                    description: Identificador único do livro
+                  title:
+                    type: string
+                    example: "Harry Potter and the Philosopher's Stone"
+                    description: Título do livro
+                  author:
+                    type: string
+                    example: "J.K. Rowling"
+                    description: Nome do autor do livro
+                  professor:
+                    type: string
+                    example: "Albus Dumbledore"
+                    description: Nome do professor do livro
+                  magicCode:
+                    type: string
+                    example: "LUYPNQ"
+                    description: Código mágico do livro
+                  createdAt:
+                    type: string
+                    format: date-time
+                    example: "2023-03-21T11:02:13.478Z"
+                    description: Data de criação do livro
+                  pages:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                          description: Identificador único da página
+                        pageNumber:
+                          type: integer
+                          example: 1
+                          description: Número da página
+                        pageType:
+                          type: string
+                          example: "TEXT"
+                          description: Tipo de conteúdo da página (texto ou imagem)
+                        content:
+                          type: string
+                          example: "Lorem ipsum dolor sit amet"
+                          description: Conteúdo da página (texto ou URL da imagem)
+                        bookId:
+                          type: integer
+                          example: 23
+                          description: Identificador único do livro ao qual a página pertence
+        "400":
+          description: "Requisição inválida"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: "InvalidDataError"
+                    description: Nome do erro
+                  message:
+                    type: string
+                    example: "Invalid data"
+                    description: Descrição do erro
+                  details:
+                    type: array
+                    items:
+                      type: string
+                      example: "\"magicCode\" length must be at least 6 characters long"
+                      description: Detalhes do erro
+        "500":
+          description: "Erro interno do servidor"
