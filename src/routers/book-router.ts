@@ -1,13 +1,13 @@
 import { getBook, postBook } from "@/controllers/book-controller";
 import { Router } from "express";
-import { validateBody } from "@/middlewares";
+import { validateBody, validateParams } from "@/middlewares";
 import { createBookSchema, magicCodeSchema } from "@/schemas";
+import Joi from "joi";
 
 const bookRouter = Router();
 
 bookRouter
   .post("/", validateBody(createBookSchema), postBook)
-  .get("/", validateBody(magicCodeSchema), getBook); //vou trazer pelo body como Magic Code
-// .get("/:magicCode", getBook);
+  .get("/", validateParams(magicCodeSchema), getBook);
 
 export { bookRouter };

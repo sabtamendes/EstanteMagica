@@ -19,12 +19,15 @@ export async function postBook(req: Request, res: Response) {
         .status(httpStatus.CONFLICT)
         .send({ message: "Título já existe" });
     }
-    return res.status(httpStatus.BAD_REQUEST).send({});
+    if (error.name === "invalidDataError") {
+      return res.status(httpStatus.BAD_REQUEST).send({});
+    }
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).send({});
   }
 }
 
 export async function getBook(req: Request, res: Response) {
-  const magicCode = req.body.magicCode as string;
+const magicCode = req.query.magicCode as unknown as string;
 
   try {
     const book = await serviceBook.getBook(magicCode);
@@ -33,7 +36,10 @@ export async function getBook(req: Request, res: Response) {
     if (error.name === "notFoundError") {
       return res.status(httpStatus.NOT_FOUND).send({});
     }
-    return res.status(httpStatus.BAD_REQUEST).send({});
+    if (error.name === "invalidDataError") {
+      return res.status(httpStatus.BAD_REQUEST).send({});
+    }
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).send({});
   }
 }
 
