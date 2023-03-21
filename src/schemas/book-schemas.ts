@@ -16,25 +16,26 @@ export const createBookSchema = Joi.object<MagicBook>({
       })
     )
     .when(Joi.array().length(12), {
-      then: Joi.array().length(12).ordered(
-        Joi.object({
-          pageNumber: Joi.number().integer().min(1).max(6).required(),
-          pageType: Joi.string().valid(PageType.TEXT).required(),
-          content: Joi.string().required(),
-        }),
-        Joi.object({
-          pageNumber: Joi.number().integer().min(1).max(6).required(),
-          pageType: Joi.string().valid(PageType.IMAGE).required(),
-          content: Joi.string().required(),
-        })
-      )
+      then: Joi.array()
+        .length(12)
+        .ordered(
+          Joi.object({
+            pageNumber: Joi.number().integer().min(1).max(6).required(),
+            pageType: Joi.string().valid(PageType.TEXT).required(),
+            content: Joi.string().required(),
+          }),
+          Joi.object({
+            pageNumber: Joi.number().integer().min(1).max(6).required(),
+            pageType: Joi.string().valid(PageType.IMAGE).required(),
+            content: Joi.string().required(),
+          })
+        ),
     })
     .required(),
 });
 
-
 type Code = {
-  magicCode: number;
+  magicCode: string;
 };
 
 export const magicCodeSchema = Joi.object<Code>({

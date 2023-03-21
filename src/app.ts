@@ -4,7 +4,6 @@ import express, { Express } from "express";
 
 import { bookRouter } from "@/routers";
 
-
 loadEnv();
 
 const app = express();
