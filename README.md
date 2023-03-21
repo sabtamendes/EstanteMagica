@@ -153,7 +153,9 @@ Links úteis:
    - `GET /book`: Retorna o livro relacionado ao código fornecido.
 
    ### Documentação swagger na raiz do projeto:
-   <p>Arquivo: <strong>api-documentation.yaml</strong></p>
+  - Arquivo:
+   <p><strong>api-documentation.yaml</strong></p>
+  
 
    ##  💻🔍 Exemplo de Uso com Endpoints detalhado:
   
