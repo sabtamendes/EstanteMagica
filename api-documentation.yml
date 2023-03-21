@@ -1,99 +1,181 @@
-openapi: "3.0.0"
+openapi: 3.0.0
 info:
-  version: "1.0.0"
-  title: API de livros
-  description: API responsável por fornecer informações sobre livros e páginas relacionados a eles.
-
+  title: Exemplo de Documentação Swagger
+  version: 1.0.0
+servers:
+  - url: http://localhost:4000
 paths:
-  /api/book/:
+  /api/book:
+    post:
+      summary: Cria um livro
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookInput'
+      responses:
+        '201':
+          description: Livro criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MagicCodeResponse'
+        '400':
+          description: Dados inválidos foram enviados na requisição
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDataError'
+        '500':
+          description: Erro interno do servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
     get:
-      summary: Obter informações de um livro
-      description: Este exemplo mostra como enviar uma solicitação GET para obter o livro relacionado ao magicCode.
+      summary: Obter um livro por magicCode
+      description: >
+        Esta rota permite obter um livro por magicCode.
       parameters:
-        - name: magicCode
-          in: query
+        - in: query
+          name: magicCode
           required: true
-          description: Código mágico do livro que se deseja obter informações
+          description: O código mágico para o livro.
           schema:
             type: string
+            minLength: 6
       responses:
-        "200":
-          description: "Sucesso"
+        '200':
+          description: OK
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    example: 23
-                    description: Identificador único do livro
-                  title:
-                    type: string
-                    example: "Harry Potter and the Philosopher's Stone"
-                    description: Título do livro
-                  author:
-                    type: string
-                    example: "J.K. Rowling"
-                    description: Nome do autor do livro
-                  professor:
-                    type: string
-                    example: "Albus Dumbledore"
-                    description: Nome do professor do livro
-                  magicCode:
-                    type: string
-                    example: "LUYPNQ"
-                    description: Código mágico do livro
-                  createdAt:
-                    type: string
-                    format: date-time
-                    example: "2023-03-21T11:02:13.478Z"
-                    description: Data de criação do livro
-                  pages:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: integer
-                          example: 1
-                          description: Identificador único da página
-                        pageNumber:
-                          type: integer
-                          example: 1
-                          description: Número da página
-                        pageType:
-                          type: string
-                          example: "TEXT"
-                          description: Tipo de conteúdo da página (texto ou imagem)
-                        content:
-                          type: string
-                          example: "Lorem ipsum dolor sit amet"
-                          description: Conteúdo da página (texto ou URL da imagem)
-                        bookId:
-                          type: integer
-                          example: 23
-                          description: Identificador único do livro ao qual a página pertence
-        "400":
-          description: "Requisição inválida"
+                $ref: '#/components/schemas/Book'
+        '400':
+          description: Dados inválidos
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  name:
-                    type: string
-                    example: "InvalidDataError"
-                    description: Nome do erro
-                  message:
-                    type: string
-                    example: "Invalid data"
-                    description: Descrição do erro
-                  details:
-                    type: array
-                    items:
-                      type: string
-                      example: "\"magicCode\" length must be at least 6 characters long"
-                      description: Detalhes do erro
-        "500":
-          description: "Erro interno do servidor"
+                $ref: '#/components/schemas/InvalidDataError'
+        '500':
+          description: Erro interno do servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+components:
+  schemas:
+    BookInput:
+      type: object
+      required:
+        - title
+        - author
+        - professor
+        - pages
+      properties:
+        title:
+          type: string
+          description: Título do livro
+        author:
+          type: string
+          description: Nome do autor do livro
+        professor:
+          type: string
+          description: Nome do professor do livro
+        pages:
+          type: array
+          description: Lista de páginas do livro
+          items:
+            $ref: '#/components/schemas/PageInput'
+          minItems: 12
+          maxItems: 12
+    PageInput:
+      type: object
+      required:
+        - pageNumber
+        - pageType
+        - content
+      properties:
+        pageNumber:
+          type: integer
+          description: Número da página
+        pageType:
+          type: string
+          enum:
+            - TEXT
+            - IMAGE
+          description: Tipo da página (texto ou imagem)
+        content:
+          type: string
+          description: Conteúdo da página (texto ou URL da imagem)
+    MagicCodeResponse:
+      type: object
+      properties:
+        magicCode:
+          type: string
+          description: Código mágico do livro criado
+    InternalServerError:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Mensagem de erro interno do servidor
+    InvalidDataError:
+      type: object
+      properties:
+        name:
+          type: string
+          example: InvalidDataError
+        message:
+          type: string
+          example: Invalid data
+        details:
+          type: array
+          items:
+            type: string
+          example:
+            - "'pages' must contain 12 items"
+    Book:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Identificador único do livro
+        title:
+          type: string
+          description: Título do livro
+        author:
+          type: string
+          description: Autor do livro
+        professor:
+          type: string
+          description: Nome do professor que recomendou o livro
+        magicCode:
+          type: string
+          description: Código para acessar recursos extras relacionados ao livro
+        createdAt:
+          type: string
+          format: date-time
+          description: Data e hora em que o livro foi criado
+        pages:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                description: Identificador único da página
+              pageNumber:
+                type: integer
+                description: Número da página no livro
+              pageType:
+                type: string
+                description: Tipo da página (texto ou imagem)
+              content:
+                type: string
+                description: Conteúdo de texto ou URL da imagem
+              bookId:
+                type: integer
+                description: Identificador do livro ao qual a página pertence
+
