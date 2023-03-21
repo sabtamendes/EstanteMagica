@@ -1,21 +1,5 @@
-/*
-  Warnings:
-
-  - You are about to drop the `Livro` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `Pagina` table. If the table is not empty, all the data it contains will be lost.
-
-*/
 -- CreateEnum
 CREATE TYPE "PageType" AS ENUM ('TEXT', 'IMAGE');
-
--- DropForeignKey
-ALTER TABLE "Pagina" DROP CONSTRAINT "Pagina_livro_id_fkey";
-
--- DropTable
-DROP TABLE "Livro";
-
--- DropTable
-DROP TABLE "Pagina";
 
 -- CreateTable
 CREATE TABLE "Book" (
