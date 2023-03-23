@@ -17,9 +17,9 @@ export function generateRandomCode(): string {
 async function createBook() {
   const book = await prisma.book.create({
     data: {
-      title: "Meu Livro",
-      author: "Eu Mesmo",
-      professor: "Prof. Fulano",
+      title: "Harry Potter and the Philosopher's Stone",
+      author: "J.K. Rowling",
+      professor: "Albus Dumbledore",
       magicCode: generateRandomCode(),
       pages: {
         create: [

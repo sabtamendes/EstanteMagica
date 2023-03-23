@@ -15,7 +15,17 @@ Em seguida, instale as dependências usando o gerenciador npm:
 ``` bash
 npm i
 ```
-Crie um arquivo <span style="color: yellow"> .env.development </span> e <span style="color: yellow"> .env.test </span> na raiz do projeto e defina as variáveis usando o  <span style="color: yellow"> .env.example </span>
+Crie um arquivo <span style="color: yellow"> .env.development </span> na raiz do projeto e defina as variáveis usando o  <span style="color: yellow"> .env.example </span>
+
+```env
+POSTGRES_USERNAME=
+POSTGRES_PASSWORD=
+POSTGRES_PORT=
+POSTGRES_DATABASE=
+
+DATABASE_URL=postgresql://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DATABASE}?schema=public
+
+```
 </details>
 
 <details>
@@ -27,7 +37,7 @@ Crie um arquivo <span style="color: yellow"> .env.development </span> e <span st
 1. Para gerar uma nova migração de banco de dados com base no estado atual do schema e ou automaticamente gerar o banco de dados:
 
 ```bash
-npm run migration:generate
+npm run dev:migration:generate
 ```
 
 2. Para preencher o banco de dados com dados iniciais usando as variáveis de ambiente necessárias para a execução do projeto:
