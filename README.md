@@ -1,5 +1,7 @@
 # Estante Mágica 📚💭✨
 
+<p>A Estante Mágica é uma aplicação bem legal que permite a criança compartilhar suas próprias histórias no livro com ilustrações tornando a história ainda mais interessante. </p>
+
 <details>
   <summary><strong>Instalação 🛠️</strong></summary>
 
