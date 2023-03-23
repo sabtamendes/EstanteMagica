@@ -153,8 +153,7 @@ Links úteis:
    - `GET /book`: Retorna o livro relacionado ao código fornecido.
 
    ### Documentação swagger na raiz do projeto:
-  - Arquivo:
-   <p><strong>api-documentation.yaml</strong></p>
+  <p>Arquivo: <strong>api-documentation.yaml</strong></p>
   
 
    ##  💻🔍 Exemplo de Uso com Endpoints detalhado:
@@ -399,3 +398,20 @@ HTTP/1.1 500 Internal Server Error
  
   
  </details>
+
+<details>
+ <summary> <strong>Aprendizado </strong>📚📝</summary>
+<br />
+ <p>Ao resolver o desafio fornecido, tive a oportunidade de aplicar minhas habilidades em programação. 
+ 
+ Primeiramente, analisei o problema apresentado e elaborei um plano de ação para resolvê-lo.
+
+ Em seguida, utilizei o TypeScript para desenvolver uma solução mais robusta e segura, garantindo que meu código estivesse livre de erros e problemas comuns de tipagem.
+
+Para implementar essa solução, utilizei o Node.js para criar um ambiente de execução rápido e escalável, que permitiu que meu código fosse executado de maneira eficiente e sem interrupções.
+
+Para acessar o banco de dados, escolhi o Prisma, uma ferramenta de ORM (Object-Relational Mapping) que me permitiu trabalhar com o banco de dados de forma mais simples e intuitiva. Com o Prisma, pude definir modelos de dados, consultas e mutações usando uma interface de programação de aplicativos (API) muito intuitiva.
+
+Ao final do projeto, consegui implementar uma solução robusta e escalável que atendeu a todas as necessidades do problema apresentado, graças ao uso conjunto de TypeScript, Node.js e Prisma.</p>
+
+</details>
