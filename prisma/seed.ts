@@ -19,7 +19,7 @@ async function createBook() {
     data: {
       title: "Harry Potter and the Philosopher's Stone",
       author: "J.K. Rowling",
-      professor: "Albus Dumbledore",
+      professorPink: "Albus Dumbledore",
       magicCode: generateRandomCode(),
       pages: {
         create: [
